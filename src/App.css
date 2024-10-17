@@ -45,6 +45,7 @@ form {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 form input {
   padding: 10px;
@@ -59,4 +60,20 @@ form button {
   background-color: #52a6d6;
   color: #fff;
   cursor: pointer;
+}
+.movie-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.movie-detail h2 {
+  font-size: 2rem;
+  font-family: 'Lobster', cursive;
+  margin-bottom: 20px;
+}
+.movie-detail p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
+import MovieDetail from './components/movieDetail';
 import MovieList from './components/movieList';
 import Filter from './components/filter';
 import './App.css';
@@ -8,14 +10,18 @@ const App = () => {
     {
       title: 'Inception',
       description: 'A mind-bending thriller by Christopher Nolan.',
+      fullDescription: 'Inception is a 2010 science fiction heist thriller film...',
       posterURL: 'https://play-lh.googleusercontent.com/buKf27Hxendp3tLNpNtP3E-amP0o4yYV-SGKyS2u-Y3GdGRTyfNCIT5WAVs2OudOz6so5K1jtYdAUKI9nw8',
       rating: 5,
+      trailerURL: 'https://www.youtube.com/embed/YoHD9XEInc0',
     },
     {
       title: 'The Matrix',
       description: 'A hacker discovers the nature of reality.',
+      fullDescription: 'The Matrix is a 1999 science fiction action film...',
       posterURL: 'https://play-lh.googleusercontent.com/SPex4LxBKzJkk3SOt8qtlq05wW6NsoKjLEqHIIDmUtqRYhsIGtKpXZZbdBYLyqSulWP0Fn41xx8RCnXNNIA',
       rating: 4,
+      trailerURL: 'https://www.youtube.com/embed/vKQi3bBA1y8',
     },
   ]);
 
@@ -43,15 +49,28 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <h1>Liste de films</h1>
-      <Filter handleFilter={handleFilter} />
-      <MovieList movies={filteredMovies} />
-      <MovieForm addMovie={addMovie} />
-    </div>
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <h1>Liste de films</h1>
+                <Filter handleFilter={handleFilter} />
+                <MovieList movies={filteredMovies} />
+                <MovieForm addMovie={addMovie} />
+              </>
+            }
+          />
+          <Route path="/movie/:title" element={<MovieDetail movies={movies} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
+//formulaire pour ajouter un film
 const MovieForm = ({ addMovie }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -111,3 +130,4 @@ const MovieForm = ({ addMovie }) => {
 };
 
 export default App;
+
